@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Hotel</title>
+    <title>Родинний двір</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -15,9 +15,9 @@
 <body>
     
     <ul class="glossymenu">
-	<li id="exterier_menu_link" class="current"><a><b>Exterier</b></a></li>
-	<li id="rooms_menu_link"><a><b>Rooms</b></a></li>
-	<li id="contacts_menu_link"><a><b>Contacts</b></a></li>	
+	<li id="exterier_menu_link" class="current"><a><b>Екстер'єр</b></a></li>
+	<li id="rooms_menu_link"><a><b>Номери</b></a></li>
+	<li id="contacts_menu_link"><a><b>Наші контакти</b></a></li>	
     </ul>
     
     <div id="content"></div>

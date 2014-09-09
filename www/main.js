@@ -27,7 +27,11 @@ function show_photos_galery(photos_content, room_id){
 		useKeyInput: true,
                 useSlider: true,
                 useCaption: true,
-                useResize: true
+                useResize: true,
+                reflection: 0.2,
+                heightRatio: 0.47,
+                interval: 3000,
+                factor: 160
         });
     });
 }
