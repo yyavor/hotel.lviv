@@ -22,17 +22,21 @@ function show_photos_galery(photos_content, room_id){
         }        
         var mf = new MooFlow($('MooFlow'), {
                 startIndex: Math.round((photos_galery.length)/2)-1,
-                useWindowResize: true,
 		useMouseWheel: true,
+                useResize: false,
+                useWindowResize: false,
 		useKeyInput: true,
                 useSlider: true,
                 useCaption: true,
-                useResize: true,
-                reflection: 0.2,
-                heightRatio: 0.47,
+                reflection: 0.4,
+                heightRatio: 0.6,
                 interval: 3000,
                 factor: 160
         });
+        var page_height = $j("html").height();
+        console.log(page_height);
+        $j("#content").height(page_height-48);
+        $j(".mf").width();
     });
 }
 
@@ -58,7 +62,9 @@ function show_contacts(){
     if ($j("#content").length){
         $j("#content").empty();
     }
+    
     $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="600" height="450" frameborder="0" style="border:0"></iframe></div>');
+    $j("#content").append('<div id="contacts_text">Телефон: +380 (63) 666666666<br>Адреса: м.Львів, вул. Скнилівська 75а</div>');
 }
 
 $j( document ).ready(function() {

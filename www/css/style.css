@@ -4,6 +4,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
 }
 
 body {
@@ -16,9 +17,13 @@ body {
 
 #content{
     position: relative;
+    float: bottom;
     margin: 3%;
     margin-top: 0px;
+    margin-bottom: 0;
     text-align: center;
+    vertical-align: middle;
+    border-radius: 25px;
 }
 
 .room_photo_item{
@@ -44,6 +49,9 @@ body {
 	background: url(/images/menur_bg.gif) repeat-x; /*tab background image path*/
 	height: 46px;
 	list-style: none;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
 }
 
 .glossymenu li{
@@ -82,7 +90,8 @@ body {
 	background: url(/images/menur_hover_right.gif) no-repeat right top; /*right tab image path*/
 }
 
-.mf{visibility: hidden; z-index:1; color:#fff; font-size:14px}
+.mf{visibility: hidden; z-index:1; color:#fff; font-size:14px; -webkit-border-radius: 35px;
+-moz-border-radius: 35px; border-radius: 35px;}
 .mf * {
 	outline:none;
 	border:none;
@@ -186,4 +195,11 @@ body {
 	background:url(/images/galery/left-slider.gif) repeat-x center;
 	width:8px;
 	height:16px;
+}
+
+#contacts_text {
+    font-size: 24px;
+    text-shadow: 4px 4px 4px rgba(218, 221, 221, 0.40);
+    color: white;
+    text-align: center;
 }
