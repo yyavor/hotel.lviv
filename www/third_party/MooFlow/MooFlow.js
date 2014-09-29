@@ -414,7 +414,7 @@ Element.implement({
 				ctx.fillRect(0, arg.height*0.5, arg.width, arg.height);
 				var gra = ctx.createLinearGradient(0, 0, 0, arg.height*arg.ref);					
 				gra.addColorStop(1, "rgba(255, 255, 255, 1)");
-				gra.addColorStop(0, "rgba(255, 255, 255, 0.5");
+				gra.addColorStop(0, "rgba(255, 255, 255, 0.6");
 				ctx.fillStyle = gra;
 				ctx.rect(0, 0, arg.width, arg.height);
 				ctx.fill();

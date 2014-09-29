@@ -116,6 +116,16 @@ body {
 	background:url(/images/galery/ajax_loader.gif) no-repeat 50% 0;
 	padding:50px 0;
 }
+.transparent{
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 27%, rgba(0,0,0,1) 83%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(27%,rgba(0,0,0,0)), color-stop(83%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 27%,rgba(0,0,0,1) 83%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,0,0,0) 27%,rgba(0,0,0,1) 83%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,0,0,0) 27%,rgba(0,0,0,1) 83%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 27%,rgba(0,0,0,1) 83%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
 .mf div.caption {
 	position:absolute;
 	text-align:center;
@@ -203,13 +213,13 @@ body {
 
 #contacts_text {
     font-size: 1.5em;
-    text-shadow: 4px 4px 4px rgba(218, 221, 221, 0.40);
+    text-shadow: 4px 5px 6px rgba(0, 0, 0, 0.91);
     color: white;
     text-align: center;
 }
 
 #contacts_text a{
     font-size: 1.5em;
-    text-shadow: 4px 4px 4px rgba(218, 221, 221, 0.40);
+    text-shadow: 4px 5px 6px rgba(0, 0, 0, 0.91);
     color: white;
 }

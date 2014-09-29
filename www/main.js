@@ -45,9 +45,8 @@ function show_photos_galery(photos_content, room_id){
          .replace(/ /g, '')
          .split(',');
         
-        $j("#MooFlow").css("background-color", "rgba("+moo_flow_background[0]+", "+moo_flow_background[1]+", "+moo_flow_background[2]+", 0.7)");
-
-        console.log(moo_flow_background);
+        $j("#MooFlow").css("background-color", "rgba("+moo_flow_background[0]+", "+moo_flow_background[1]+", "+moo_flow_background[2]+", 0.5)");
+        $j('#MooFlow').addClass('transparent');
         
     });
 }
