@@ -64,7 +64,7 @@ function show_contacts(){
     }
     
     $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="600" height="450" frameborder="0" style="border:0"></iframe></div>');
-    $j("#content").append('<div id="contacts_text">Телефон: +380 (63) 666666666<br>Адреса: м.Львів, вул. Скнилівська 75а</div>');
+    $j("#content").append('<div id="contacts_text">Телефон: +38(097) 340 68 00; +38(050) 100 15 61<br>E-mail: rod.dvir@gmail.com<br>Адреса: м.Львів, вул. Скнилівська 75а</div>');
 }
 
 $j( document ).ready(function() {
