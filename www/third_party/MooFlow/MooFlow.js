@@ -155,7 +155,7 @@ var MooFlow = new Class({
 			'ref': this.options.reflection,
 			'height': obj.height,
 			'width': obj.width,
-			'color': this.options.bgColor
+			'color': this.options.bgColor,
 		}).setStyles({'width':'100%','height':'50%','background-color': this.options.bgColor}).inject(obj['con']);
 		
 		this.loader.set('text', (counter+1) + ' / ' + this.loadedImages.length);
@@ -413,8 +413,8 @@ Element.implement({
 				ctx.fillStyle = arg.color;
 				ctx.fillRect(0, arg.height*0.5, arg.width, arg.height);
 				var gra = ctx.createLinearGradient(0, 0, 0, arg.height*arg.ref);					
-				gra.addColorStop(1, "rgba(255, 255, 255, 1.0)");
-				gra.addColorStop(0, "rgba(255, 255, 255, "+(1-arg.ref)+")");
+				gra.addColorStop(1, "rgba(255, 255, 255, 1)");
+				gra.addColorStop(0, "rgba(255, 255, 255, 0.5");
 				ctx.fillStyle = gra;
 				ctx.rect(0, 0, arg.width, arg.height);
 				ctx.fill();

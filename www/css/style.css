@@ -30,8 +30,6 @@ body {
     vertical-align: middle;
     display: inline-block;
     width: 25%;
-    border: 2px;
-    border-color: white;
     margin: 2%;
     cursor: pointer;
 }
@@ -41,6 +39,10 @@ body {
     border-radius: 25px;
     box-shadow: 10px 10px 5px #000;
     cursor: pointer;
+}
+
+.room_photo_item img:hover{
+    width: 95%;
 }
 
 .glossymenu{
@@ -200,8 +202,14 @@ body {
 }
 
 #contacts_text {
-    font-size: 24px;
+    font-size: 1.5em;
     text-shadow: 4px 4px 4px rgba(218, 221, 221, 0.40);
     color: white;
     text-align: center;
+}
+
+#contacts_text a{
+    font-size: 1.5em;
+    text-shadow: 4px 4px 4px rgba(218, 221, 221, 0.40);
+    color: white;
 }

@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Готель Родинний Двір - це затишне місце у Львові, де ви зможите зупинитись для проживання."/>
+    <meta name="KEYWORDS" content="готелі львова, готель львів, готелі львів, родинний двір, садиба, оренда кімнати, подобова оренда, житло, готель" />
     <title>Родинний двір</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     
