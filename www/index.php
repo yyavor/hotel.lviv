@@ -7,7 +7,7 @@
     <title>Родинний двір</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="third_party/jquery/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="third_party/mootools/mootools-1.2-core.js"></script>
     <script type="text/javascript" src="third_party/mootools/mootools-1.2-more.js"></script>
     <script type="text/javascript" src="third_party/MooFlow/MooFlow.js"></script>
