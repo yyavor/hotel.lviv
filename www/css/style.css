@@ -44,14 +44,14 @@ body {
 .room_photo_item img:hover{
     width: 95%;
 }
-
+/*
 .glossymenu{
         text-align: center;
 	position: relative;
 	padding: 0 0 0 34px;
 	margin: auto 20%;
 	background: url(/images/menur_bg.gif) repeat-x; /*tab background image path*/
-	height: 46px;
+/*	height: 46px;
 	list-style: none;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
@@ -71,7 +71,7 @@ body {
 	font-size: 13px;
 	font-weight: bold;
 	padding:0 0 0 16px; /*Padding to accomodate left tab image. Do not change*/
-	height: 46px;
+/*	height: 46px;
 	line-height: 46px;
 	text-align: center;
 	cursor: pointer;	
@@ -81,18 +81,18 @@ body {
 	float: left;
 	display: block;
 	padding: 0 24px 0 8px; /*Padding of menu items*/
-}
+/*}
 
 .glossymenu li.current a, .glossymenu li a:hover{
 	color: #fff;
 	background: url(/images/menur_hover_left.gif) no-repeat; /*left tab image path*/
-	background-position: left;
+/*	background-position: left;
 }
 
 .glossymenu li.current a b, .glossymenu li a:hover b{
 	color: #fff;
 	background: url(/images/menur_hover_right.gif) no-repeat right top; /*right tab image path*/
-}
+//}
 
 .mf{visibility: hidden; z-index:1; color:#fff; font-size:14px; -webkit-border-radius: 35px;
 -moz-border-radius: 35px; border-radius: 35px;}
@@ -223,3 +223,49 @@ body {
     text-shadow: 4px 5px 6px rgba(0, 0, 0, 0.91);
     color: white;
 }
+
+/* Menu */ 
+.accordion h3 { 
+font-size : 12px; 
+color : #fff; 
+padding-left : 10px; 
+background : url(/images/accordion/accordion.png) no-repeat right 0; 
+line-height :25px; 
+height : 25px; 
+cursor : pointer; 
+margin : 0; 
+text-align : left; 
+font-weight : bold; 
+font-family: Arial, Helvetica, sans-serif; 
+} 
+.accordion h3:hover { 
+color : #ffa; 
+background-image: url(/images/accordion/accordion.png); 
+background-repeat: no-repeat; 
+background-position: right -25px; 
+} 
+.accordion h3.active { 
+background : url(/images/accordion/accordion.png) no-repeat right -50px; 
+} 
+.accordion h3.active:hover { 
+background : url(/images/accordion/accordion.png) no-repeat right -75px; 
+} 
+.accordion p { 
+display : none; 
+margin : 0; 
+padding : 7px 0 7px 7px; 
+} 
+.accordion a { 
+font-size : 11px; 
+color : #fff; 
+text-align : left; 
+font-weight : bold; 
+padding-left : 15px; 
+} 
+.accordion p.linked a { 
+background : url(/images/accordion/bull.gif) no-repeat 0 50%; 
+} 
+.accordion p.linked a:hover { 
+background : url(/images/accordion/bulls.gif) no-repeat 0 50%; 
+} 
+/* ---------- */ 
