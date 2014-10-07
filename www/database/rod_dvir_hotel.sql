@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Окт 04 2014 г., 14:55
+-- Время создания: Окт 07 2014 г., 18:59
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `hotel_info` (
-  `address` text COLLATE utf8_bin NOT NULL,
-  `email` varchar(255) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `address` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `hotel_info`
@@ -45,9 +45,9 @@ INSERT INTO `hotel_info` (`address`, `email`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `hotel_phones` (
-  `phone_numbers` varchar(255) COLLATE utf8_bin NOT NULL,
+  `phone_numbers` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `phone_numbers` (`phone_numbers`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `hotel_phones`
@@ -64,12 +64,12 @@ INSERT INTO `hotel_phones` (`phone_numbers`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rooms` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `type` varchar(255) COLLATE utf8_bin NOT NULL,
-  `comments` text COLLATE utf8_bin NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `comments` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `price` double NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `rooms`
@@ -94,9 +94,9 @@ INSERT INTO `rooms` (`id`, `type`, `comments`, `price`) VALUES
 
 CREATE TABLE IF NOT EXISTS `rooms_types` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
-  `type_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `rooms_types`
@@ -114,10 +114,10 @@ INSERT INTO `rooms_types` (`id`, `type_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`

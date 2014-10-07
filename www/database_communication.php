@@ -1,13 +1,11 @@
 <?php
 class DataBaseConfiguration
 {
-    public $HOST = "localhost";
-    public $USER = "root";
-    public $PASSWORD = "";
-    public $DB_NAME = "rod_dvir_hotel";
+    public static $HOST = "localhost";
+    public static $USER = "root";
+    public static $PASSWORD = "";
+    public static $DB_NAME = "rod_dvir_hotel";
 }
-
-echo DataBaseConfiguration::$HOST;
 
 class DataBase
 {
@@ -36,6 +34,7 @@ class DataBase
 
 $hotel_db = new DataBase();
 $hotel_db->create_connection();
+$hotel_db->close_connection();
 
 
 
