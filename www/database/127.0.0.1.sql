@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Окт 07 2014 г., 18:59
+-- Время создания: Окт 07 2014 г., 19:09
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `rod_dvir_hotel`
 --
+CREATE DATABASE `rod_dvir_hotel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `rod_dvir_hotel`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `hotel_info`
 --
 
+DROP TABLE IF EXISTS `hotel_info`;
 CREATE TABLE IF NOT EXISTS `hotel_info` (
   `address` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
@@ -36,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `hotel_info` (
 --
 
 INSERT INTO `hotel_info` (`address`, `email`) VALUES
+('м. Львів, вул. Скнилівська, 75б', 'rod.dvir@gmail.com'),
 ('м. Львів, вул. Скнилівська, 75б', 'rod.dvir@gmail.com');
 
 -- --------------------------------------------------------
@@ -44,6 +48,7 @@ INSERT INTO `hotel_info` (`address`, `email`) VALUES
 -- Структура таблицы `hotel_phones`
 --
 
+DROP TABLE IF EXISTS `hotel_phones`;
 CREATE TABLE IF NOT EXISTS `hotel_phones` (
   `phone_numbers` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   UNIQUE KEY `phone_numbers` (`phone_numbers`)
@@ -63,6 +68,7 @@ INSERT INTO `hotel_phones` (`phone_numbers`) VALUES
 -- Структура таблицы `rooms`
 --
 
+DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE IF NOT EXISTS `rooms` (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -92,6 +98,7 @@ INSERT INTO `rooms` (`id`, `type`, `comments`, `price`) VALUES
 -- Структура таблицы `rooms_types`
 --
 
+DROP TABLE IF EXISTS `rooms_types`;
 CREATE TABLE IF NOT EXISTS `rooms_types` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -113,6 +120,7 @@ INSERT INTO `rooms_types` (`id`, `type_name`) VALUES
 -- Структура таблицы `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
