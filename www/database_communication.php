@@ -6,6 +6,12 @@ class Hotel
     function __construct(){
         $this->rooms_root_folder = "images/rooms";
         $this->exterier_folder = "images/hotel_exterier";
+        $this->tables_matches = array(
+            "room_type_class" => "rooms_types",
+            "phone_class" => "hotel_phones",
+            "contacts_info_class" => "hotel_info",
+            "available_service_class" => "service"
+        );
     }
     
     private function __get_table_items($table){
@@ -23,29 +29,31 @@ class Hotel
         return $result;    
     }
     
-    function update_table_row($params){
-        $table_name = array_shift($params);
+    function update_table_row(){
+        $params = func_get_args();
+        $table_name = $this->tables_matches[array_shift($params)];
         $row_info = array_shift($params);
         $key_name = array_shift($params);
         $key_value = array_shift($params);
         
-        DB::update($table_name, $new_row_info, $key_name."=".$key_value);
+        return DB::update($table_name, $row_info, $key_name."=%s", $key_value);
     }
     
-    function remove_table_row($params){
-        $table_name = array_shift($params);
-        $row_info = array_shift($params);
+    function remove_table_row(){
+        $params = func_get_args();
+        $table_name = $this->tables_matches[array_shift($params)];
         $key_name = array_shift($params);
         $key_value = array_shift($params);
         
-        DB::delete($table_name, "%s=%s", $key_name ,$key_value);
+        return DB::delete($table_name, $key_name."=%s", $key_value);
     }
     
-    function add_table_row($params){
-        $table_name = array_shift($params);
+    function add_table_row(){
+        $params = func_get_args();
+        $table_name = $this->tables_matches[array_shift($params)];
         $row_info = array_shift($params);
         
-        DB::insertIgnore($table_name, $row_info);
+        return DB::insertIgnore($table_name, $row_info);
     }
     
     ////////////////////////////////
@@ -66,14 +74,16 @@ class Hotel
             $item ++;
         }
         
-        return json_encode($hotel_info_result_array);
+        return $hotel_info_result_array;
     }
     
     function get_hotel_service_info(){
         $hotel_rooms_types_table = $this->__get_table_items('rooms_types');
         $hotel_available_service = $this->__get_table_items('service');
-        
-        return json_encode(array_merge($hotel_rooms_types_table, $hotel_available_service));
+        $result = array();
+        $result['rooms_types'] = $hotel_rooms_types_table;
+        $result['available_services'] = $hotel_available_service;
+        return $result;
     }
     
     ///////////////////////////////
@@ -97,7 +107,7 @@ class Hotel
                 $room_photos_path['rooms_lists'][$room] = $current_room_dir.'/'.array_shift($room_images);
             }            
         }
-        return json_encode($room_photos_path['rooms_lists']);
+        return $room_photos_path['rooms_lists'];
     }
     
     function get_separate_room_photos($room_id){
@@ -111,7 +121,7 @@ class Hotel
         if (count($room_images)){
             $room_photos_path['rooms_lists'] = $this->__get_images_full_path($current_room_dir, $room_images);
         }
-        return json_encode($room_photos_path['rooms_lists']);
+        return $room_photos_path['rooms_lists'];
     }
     
     /////////////////////////////////
@@ -122,9 +132,16 @@ class Hotel
         $hotel_exterier_photos = array("exterier_photos" => array());        
         $exterier_photos_names = array_diff(scandir($this->exterier_folder), array('.', '..'));
         $hotel_photos['exterier_photos'] = $this->__get_images_full_path($this->exterier_folder, $exterier_photos_names);
-        return json_encode($hotel_photos);
+        return $hotel_photos;
     }
 }
+
+$hotel = new Hotel();
+
+$hotel->add_table_row("room_type_class", array('comment'=>'some comment will be here', 'type_name'=>'Yura-new-type'));
+
+//$hotel->update_table_row("phone_class", array('address'=>"м. Львів, вул. Скнилівська, 75d", 'email'=>"dfghjkl"), 'id', '1');
+
 
 
 
