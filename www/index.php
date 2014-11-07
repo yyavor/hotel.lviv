@@ -18,15 +18,11 @@
     
 </head>
 <body>
-    
-<div id='cssmenu'>
+<div id='cssmenu'>    
 <ul>
    <li><a><span id="exterier_menu_link">Головна</span></a></li>
    <li class='has-sub'><a><span>Номери</span></a>
-      <ul>
-         <li><a><span>Стандарт</span></a></li>
-         <li><a><span>Напів Люкс</span></a></li>
-         <li><a><span>Люкс</span></a></li>
+      <ul id='rooms_types'>
       </ul>
    </li>
    <li><a><span id="contacts_menu_link">Наші контакти</span></a></li>

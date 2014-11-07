@@ -1,8 +1,7 @@
 <?php
     ob_start();
     session_start();
-    include('/database_communication.php');
-    
+    include('/database_communication.php');    
     
     if (!isset($_SESSION['name'])){
         header("location:login.php");

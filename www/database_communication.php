@@ -10,7 +10,8 @@ class Hotel
             "room_type_class" => "rooms_types",
             "phone_class" => "hotel_phones",
             "contacts_info_class" => "hotel_info",
-            "available_service_class" => "service"
+            "available_service_class" => "service",
+            "hotel_separate_room_class" => "rooms"
         );
     }
     
@@ -90,24 +91,25 @@ class Hotel
     //  ROOMS PHOTOS FUNCTINALITY//
     ///////////////////////////////
     
-    function get_rooms_main_photos($room_type=NULL){
-        $query = "SELECT * FROM rooms";
-        $room_photos_path = array('rooms_lists' => array());
+    function get_rooms_main_info($room_type=NULL){
+        $room_info = array('rooms' => array());
         if ($room_type){
-            $rooms_id = DB::queryOneColumn('id', "SELECT * FROM rooms WHERE type=%s", $room_type);
+            $rooms_query_result = DB::queryFullColumns("SELECT * FROM rooms WHERE type=%s", $room_type);
         }else{
-            $rooms_id = DB::queryOneColumn('id', "SELECT * FROM rooms" );
+            $rooms_query_result = DB::queryFullColumns("SELECT * FROM rooms" );
         }
-        
-        foreach ($rooms_id as $room)
+        foreach ($rooms_query_result as $room)
         {
-            $current_room_dir = $this->rooms_root_folder.'/'.$room;
+            $current_room_dir = $this->rooms_root_folder.'/'.$room['rooms.id'];
             $room_images = array_diff(scandir($current_room_dir), array('.', '..'));
             if (count($room_images)){
-                $room_photos_path['rooms_lists'][$room] = $current_room_dir.'/'.array_shift($room_images);
+                $room_info['rooms'][$room['rooms.id']]['main_photo'] = $current_room_dir.'/'.array_shift($room_images);
+                $room_info['rooms'][$room['rooms.id']]['type'] = $room['rooms.type'];
+                $room_info['rooms'][$room['rooms.id']]['comments'] = $room['rooms.comments']; 
+                $room_info['rooms'][$room['rooms.id']]['price'] = $room['rooms.price'];
             }            
         }
-        return $room_photos_path['rooms_lists'];
+        return $room_info;
     }
     
     function get_separate_room_photos($room_id){
@@ -124,6 +126,34 @@ class Hotel
         return $room_photos_path['rooms_lists'];
     }
     
+    function add_room($params)
+    {
+        if (!$this->add_table_row($params))
+        {
+            return False;
+        }
+        /*
+        if (!is_dir('./images/rooms/'.$params)) {
+            mkdir('./images/rooms/'.$params, 0755);
+        }
+         * 
+         */
+    }
+    
+    function remove_room($params)
+    {
+        if (!$this->remove_table_row($params))
+        {
+            return False;
+        }
+        /*
+        if (is_dir('./images/rooms/'.$params)) {
+            rmdir('./images/rooms/'.$params);
+        }
+         * 
+         */
+    }
+    
     /////////////////////////////////
     //EXTERIER PHOTOS FUNCTIONALITY//
     /////////////////////////////////
@@ -136,9 +166,14 @@ class Hotel
     }
 }
 
-$hotel = new Hotel();
+//$hotel = new Hotel();
 
-$hotel->add_table_row("room_type_class", array('comment'=>'some comment will be here', 'type_name'=>'Yura-new-type'));
+//print(json_encode($hotel->get_separate_room_photos()));
+
+//print(json_encode($hotel->get_rooms_main_info()));
+
+
+//$hotel->add_table_row("room_type_class", array('comment'=>'some comment will be here', 'type_name'=>'Yura-new-type'));
 
 //$hotel->update_table_row("phone_class", array('address'=>"м. Львів, вул. Скнилівська, 75d", 'email'=>"dfghjkl"), 'id', '1');
 

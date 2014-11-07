@@ -1,24 +1,24 @@
 <?php
 header('Content-Type: application/json');
 include ('database_communication.php');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['sender'])){
-        
         $request_sender = $_POST['sender'];
-        if ($request_sender == 'admin_ui' and isset($_POST['data'])){
+        if ($request_sender == 'user_ui' and isset($_POST['data'])){
             $data = $_POST['data'];
             switch ($data['command']) {
                 case 0:
-                    $response = get_data_for_admin_ui();
+                    $response = get_data_for_main_page();
                     break;
                 case 1:
-                    $response = update_row($data['params']);
+                    $response = get_separate_room_photos($data['params']);
                     break;
                 case 2:
-                    $response = delete_row($data['params']);
+                    $response = get_rooms_by_type($data['params']);
                     break;
                 case 3:
-                    $response = add_row($data['params']);
+                    $response = get_hotel_contacts_info();
                     break;
             }
             
@@ -29,36 +29,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-function get_data_for_admin_ui()
+function get_data_for_main_page()
 {
     $hotel = new Hotel();
     
     $result = array();
-    $result["hotel_contacts_info"] = $hotel->get_hotel_contacts_info();
     $result["hotel_service_info"] = $hotel->get_hotel_service_info();
-    $result["hotel_rooms"] = $hotel->get_rooms_main_info();            
+    $result = array_merge($result, $hotel->get_hotel_exterier_photos());
     
     return $result;
 }
 
-function update_row($params)
+function get_rooms_by_type($params)
 {
     $hotel = new Hotel();
-    $result = $hotel->update_table_row($params[0], $params[1], '`id`', $params[2]);
+    $result = $hotel->get_rooms_main_info($params);
     return $result;
 }
 
-function delete_row($params)
+function get_separate_room_photos($params)
 {
     $hotel = new Hotel();
-    $result = $hotel->remove_table_row($params[0], '`id`', $params[1]);
+    
+    $result = array();
+    $result["room_photo_galery"] = $hotel->get_separate_room_photos($params);
+    
     return $result;
 }
 
-function add_row($params)
+function get_hotel_contacts_info()
 {
     $hotel = new Hotel();
-    $result = $hotel->update_table_row($params[0], $params[1]);
+    
+    $result = array();
+    $result = $hotel->get_hotel_contacts_info();
+    
     return $result;
 }
+
+
 

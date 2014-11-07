@@ -5,100 +5,152 @@
  */
 var $j = jQuery.noConflict();
 
-function show_photos_galery(photos_content, room_id){
-    $j.getJSON( "get_hotel_photos.php", function(data) {
-        if ($j("#content").length){
-            $j("#content").empty();
-        }
-        $j("#content").append("<div id='MooFlow' class='mf'></div>");
-        if (typeof room_id === 'undefined'){
-            photos_galery = data[photos_content];
-        }
-        else{
-            photos_galery = data[photos_content][room_id];
-        }
-        for (var i=0; i<photos_galery.length; i++){
-            $j("#content").children().append("<div><img src='"+photos_galery[i]+"'/></div>");
-        }        
-        var mf = new MooFlow($('MooFlow'), {
-                bgColor: '#000',
-                startIndex: Math.round((photos_galery.length)/2)-1,
-		useMouseWheel: true,
-                useResize: false,
-                useWindowResize: false,
-		useKeyInput: true,
-                useSlider: true,
-                useCaption: true,
-                reflection: 0.4,
-                heightRatio: 0.6,
-                interval: 3000,
-                factor: 160
+$j( document ).ready(function() {
+    send_command_request(show_main_page, null, 0);
+    
+    $j("#exterier_menu_link").click(function(){
+        $j(this).addClass("current");
+        $j(this).siblings().removeClass("current");
+        send_command_request(show_main_page, null, 0);
+    });
+    
+    $j("#contacts_menu_link").click(function(){
+        $j(this).addClass("current");
+        $j(this).siblings().removeClass("current");
+        send_command_request(show_contacts, null, 3);
+    });
+});
+
+function send_command_request(callback, params, command){
+    request = {
+        "sender" : "user_ui",
+        "data" : { "command" : command, "params" : params }        
+    }
+    $j.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "get_whole_hotel_info.php",
+        data: request,
+        success: function (response_data) {
+                callback(response_data);
+            }        
         });
-        var page_height = $j("html").height();
-        console.log(page_height);
-        $j("#content").height(page_height-48);
-        $j(".mf").width();
+}
+
+function show_main_page(data){
+    room_types = data['hotel_service_info']['rooms_types'];
+    $j('#rooms_types').empty();
+    for (var i=0; i<room_types.length; i++){
+        $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span>'+room_types[i]['type_name']+'</span></a></li>');
+    }
+    $j('#rooms_types').append('<li class="room_type"><a><span>Усі кімнати</span></a></li>');
+    show_photos_galery(data['exterier_photos']);
+    
+    $j(".room_type").click(function(){
+        send_command_request(get_rooms_list, $j(this).attr('id'), 2);    
+    });
+    
+    $j("#cssmenu").css("font-size","90.5%");
+}
+
+function show_separate_room_galery(data){
+    show_photos_galery(data['room_photo_galery']);
+}
+
+function show_photos_galery(photos_content){
+    if ($j("#content").length){
+        $j("#content").empty();
+    }
+    $j("#content").append("<div id='MooFlow' class='mf'></div>");
+    for (var i=0; i<photos_content.length; i++){
+        $j("#content").children().append("<div><img src='"+photos_content[i]+"'/></div>");
+    }        
+    var mf = new MooFlow($('MooFlow'), {
+            bgColor: '#000',
+            startIndex: Math.round((photos_content.length)/2)-1,
+            useMouseWheel: true,
+            useResize: false,
+            useWindowResize: false,
+            useKeyInput: true,
+            useSlider: true,
+            useCaption: true,
+            reflection: 0.4,
+            heightRatio: 0.6,
+            interval: 3000,
+            factor: 160
+    });
+    var page_height = $j("html").height();
+    $j("#content").height(page_height-48);
+    $j(".mf").width();
+
+    var moo_flow_background = $j("#MooFlow").css("background-color");
+
+    moo_flow_background = moo_flow_background.substring(4, moo_flow_background.length-1)
+     .replace(/ /g, '')
+     .split(',');
+
+    $j("#MooFlow").css("background-color", "rgba("+moo_flow_background[0]+", "+moo_flow_background[1]+", "+moo_flow_background[2]+", 0.5)");
+    $j('#MooFlow').addClass('transparent');
+};
+
+function get_rooms_list(data){
+    rooms = data['rooms'];
+    $j("#content").empty();
+    for (room in rooms){
         
-        var moo_flow_background = $j("#MooFlow").css("background-color");
+        room_info_container = $j('<div class="room_info_container"></div>')
+        room_info_container.append('<div id="'+room+'"class="room_photo_item"></div>');
         
-        moo_flow_background = moo_flow_background.substring(4, moo_flow_background.length-1)
-         .replace(/ /g, '')
-         .split(',');
         
-        $j("#MooFlow").css("background-color", "rgba("+moo_flow_background[0]+", "+moo_flow_background[1]+", "+moo_flow_background[2]+", 0.5)");
-        $j('#MooFlow').addClass('transparent');
+        room_text_container = $j('<div class="room_text_container"></div>');
+        //room_text_container.append('<span class="room_price">Ціна: '+rooms[room]['price']+'</span>');
         
+        room_info_container.append(room_text_container);
+        
+        
+        
+        $j("#content").append(room_info_container)
+        $j("#"+room).append('<img src="'+rooms[room]['main_photo']+'" />');
+        
+    }
+    
+    $j('.room_photo_item').click(function() {
+        room_id = $j(this).attr("id");
+        send_command_request(show_separate_room_galery, room_id, 1);
     });
 }
 
-function get_rooms_list(){
-    $j.getJSON( "get_hotel_photos.php", function(data) {
-        if ($j("#content").length){
-            $j("#content").empty();
-        }
-        rooms_photos = data['rooms_lists'];
-        rooms_number = Object.keys(rooms_photos).length;
-        for (room in rooms_photos){
-            $j("#content").append('<div id="'+room+'" class="room_photo_item"></div>');
-            $j("#"+room).append('<img src="'+rooms_photos[room][0]+'" />');
-        }
-        $j('.room_photo_item').click(function() {
-            room_id = $j(this).attr("id");
-            show_photos_galery("rooms_lists", room_id);
-        });
-    });
-}
-
-function show_contacts(){
+function show_contacts(data){
+    
     if ($j("#content").length){
         $j("#content").empty();
     }
     
-    var phones = 'Телефони: +38(097) 340 68 00; +38(050) 100 15 61<br>';
-    var email = 'E-mail: <a href="mailto:rod.dvir@gmail.com">rod.dvir@gmail.com</a><br>';
-    var address = "Адреса: м.Львів, вул. Скнилівська 75б";
+    contacts_info = data['contacts_info'];
+    phones_text = 'Телефони:';
+    for (var phone_item = 0; phone_item < data['hotel_phones'].length; phone_item++){
+        
+        phones_text += '<span> '+data['hotel_phones'][phone_item]['phone']+'<span>';
+        if (phone_item < data['hotel_phones'].length-1){
+            phones_text += ';';
+        }
+        else{
+           phones_text += '<br>'; 
+        }
+    }
     
-    $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="600" height="450" frameborder="0" style="border:0"></iframe></div>');
+    email = 'E-mail: <a href="mailto:'+contacts_info['email']+'">'+contacts_info['email']+'</a><br>';
+    address = contacts_info['address'];
+    
+    width = Math.round(($j( window ).width()/100)*80);
+    height = Math.round(($j( window ).height()/100)*80);
+    
+    console.log(width, height)
+    
+    
+    $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="'+width+'" height="'+height+'" frameborder="0" style="border:0"></iframe></div>');
     $j("#content").append('<div id="contacts_text"></div>');
-    $j("#contacts_text").append(phones, email, address);
+    $j("#contacts_text").append(phones_text, email, address);
+    
 }
-
-$j( document ).ready(function() {
-    show_photos_galery("exterier_photos");
-    $j("#exterier_menu_link").click(function(){
-        $j(this).addClass("current");
-        $j(this).siblings().removeClass("current");
-        show_photos_galery("exterier_photos");
-    });
-    $j("#rooms_menu_link").click(function(){
-        $j(this).addClass("current");
-        $j(this).siblings().removeClass("current");
-        get_rooms_list();        
-    });
-    $j("#contacts_menu_link").click(function(){
-        $j(this).addClass("current");
-        $j(this).siblings().removeClass("current");
-        show_contacts();
-    });
-});
 
