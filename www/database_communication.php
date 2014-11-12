@@ -11,7 +11,7 @@ class Hotel
             "phone_class" => "hotel_phones",
             "contacts_info_class" => "hotel_info",
             "available_service_class" => "service",
-            "hotel_separate_room_class" => "rooms"
+            "hotel_rooms" => "rooms"
         );
     }
     
@@ -126,32 +126,36 @@ class Hotel
         return $room_photos_path['rooms_lists'];
     }
     
-    function add_room($params)
+    function add_room($table, $params)
     {
-        if (!$this->add_table_row($params))
+        if (!$this->add_table_row($table, $params))
         {
             return False;
         }
-        /*
-        if (!is_dir('./images/rooms/'.$params)) {
-            mkdir('./images/rooms/'.$params, 0755);
+        if (!is_dir('./images/rooms/'.$params['id'])) {
+            mkdir('./images/rooms/'.$params['id'], 0755);
         }
-         * 
-         */
     }
     
-    function remove_room($params)
+    function remove_room($table, $id)
     {
-        if (!$this->remove_table_row($params))
+        if (!$this->remove_table_row($table, 'id', $id))
         {
             return False;
         }
-        /*
-        if (is_dir('./images/rooms/'.$params)) {
-            rmdir('./images/rooms/'.$params);
+        $dir = './images/rooms/'.$id;
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+              if ($object != "." && $object != "..") {
+                if (filetype($dir."/".$object) == "dir") 
+                   rrmdir($dir."/".$object); 
+                else unlink   ($dir."/".$object);
+              }
+            }
+            reset($objects);
+            rmdir($dir);
         }
-         * 
-         */
     }
     
     /////////////////////////////////

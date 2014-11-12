@@ -51,14 +51,22 @@ function update_row($params)
 function delete_row($params)
 {
     $hotel = new Hotel();
+    if ($params[0] == 'hotel_rooms'){
+        $result = $hotel->remove_room($params[0], $params[1]);
+        return $result;
+    }
     $result = $hotel->remove_table_row($params[0], '`id`', $params[1]);
     return $result;
 }
 
 function add_row($params)
-{
+{   
     $hotel = new Hotel();
-    $result = $hotel->update_table_row($params[0], $params[1]);
+    if ($params[0] == 'hotel_rooms'){
+        $result = $hotel->add_room($params[0], $params[1]);
+        return $result;
+    }
+    $result = $hotel->add_table_row($params[0], $params[1]);
     return $result;
 }
 

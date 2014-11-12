@@ -18,16 +18,27 @@
     
 </head>
 <body>
-<div id='cssmenu'>    
-<ul>
-   <li><a><span id="exterier_menu_link">Головна</span></a></li>
-   <li class='has-sub'><a><span>Номери</span></a>
-      <ul id='rooms_types'>
-      </ul>
-   </li>
-   <li><a><span id="contacts_menu_link">Наші контакти</span></a></li>
-</ul>
-</div>
+    <div id='header'>
+        some content
+    </div>
+    <div id='left_menu_colum'>
+        <div id='menu_title'>
+            <div id="menu_title_container">
+                <b>Навігація:</b>
+            </div>
+        </div>
+        <div id='cssmenu'>    
+            <ul>
+               <li><a><span id="exterier_menu_link">Головна</span></a></li>
+               <li class='has-sub'><a><span>Номери</span></a>
+                  <ul id='rooms_types'>
+                  </ul>
+               </li>
+               <li><a><span id="contacts_menu_link">Наші контакти</span></a></li>
+            </ul>
+        </div>
+    </div>
+    
 
     
     <div id="content"></div>

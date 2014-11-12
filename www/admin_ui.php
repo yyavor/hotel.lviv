@@ -30,6 +30,6 @@
     <body>
         <div id="dialog-modal" title="Basic modal dialog" style="display: none;">
         </div>
-        <p><a href="logout.php">Logout</a></p> <!-- A link for the logout page -->
+        <p><a href="logout.php">Вихід</a></p> <!-- A link for the logout page -->
     </body>
 </html>
