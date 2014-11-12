@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var $j = jQuery.noConflict();
+var RoomsTypes;
 
 $j( document ).ready(function() {
     send_command_request(show_main_page, null, 0);
@@ -39,6 +40,7 @@ function send_command_request(callback, params, command){
 
 function show_main_page(data){
     room_types = data['hotel_service_info']['rooms_types'];
+    RoomsTypes = room_types
     $j('#rooms_types').empty();
     for (var i=0; i<room_types.length; i++){
         $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span>'+room_types[i]['type_name']+'</span></a></li>');
@@ -51,11 +53,8 @@ function show_main_page(data){
     });
     
     $j("#cssmenu").css("font-size","90.5%");
-    console.log($j("#menu_title").height(), $j("#menu_title_container").height())
-    console.log(11%2)
     padding = Math.floor(($j("#menu_title").height()-$j("#menu_title_container").height())/2);
     $j("#menu_title_container").css({"padding-top":padding});
-    console.log(padding);
 }
 
 function show_separate_room_galery(data){
@@ -105,18 +104,27 @@ function get_rooms_list(data){
         
         room_info_container = $j('<div class="room_info_container"></div>')
         room_info_container.append('<div id="'+room+'"class="room_photo_item"></div>');
-        
-        
+
         room_text_container = $j('<div class="room_text_container"></div>');
+        room_text_container.append('<div class="rooms_ids"><span><b>Номер кімнати:</b> </span>'+room+'</div><br><br>')
+        root_type_name = ''
+        for(type_el in RoomsTypes){
+            if (RoomsTypes[type_el]['id'] == rooms[room]['type']){
+                root_type_name = RoomsTypes[type_el]['type_name']
+            }                
+        }
+        room_text_container.append('<div class="rooms_types"><span><b>Тип кімнати:</b> </span>'+root_type_name+'</div><br>')
+        comments = rooms[room]['comments']
+        comments = comments.replace(/(?:\r\n|\r|\n)/g, '<br>')
+        room_text_container.append('<div class="rooms_comments"><span><b>Комментар:</b> <br></span>'+comments+'</div><br>')
         //room_text_container.append('<span class="room_price">Ціна: '+rooms[room]['price']+'</span>');
+        
         
         room_info_container.append(room_text_container);
         
         
-        
         $j("#content").append(room_info_container)
         $j("#"+room).append('<img src="'+rooms[room]['main_photo']+'" />');
-        
     }
     
     $j('.room_photo_item').click(function() {
@@ -148,9 +156,7 @@ function show_contacts(data){
     address = contacts_info['address'];
     
     width = Math.round(($j( window ).width()/100)*80);
-    height = Math.round(($j( window ).height()/100)*80);
-    
-    console.log(width, height)    
+    height = Math.round(($j( window ).height()/100)*80);  
     
     $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="'+width+'" height="'+height+'" frameborder="0" style="border:0"></iframe></div>');
     $j("#content").append('<div id="contacts_text"></div>');
