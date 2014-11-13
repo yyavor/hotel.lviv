@@ -43,7 +43,7 @@ function show_main_page(data){
     RoomsTypes = room_types
     $j('#rooms_types').empty();
     for (var i=0; i<room_types.length; i++){
-        $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span>'+room_types[i]['type_name']+'</span></a></li>');
+        $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span><b>'+room_types[i]['type_name']+'</b></span></a></li>');
     }
     $j('#rooms_types').append('<li class="room_type"><a><span>Усі кімнати</span></a></li>');
     show_photos_galery(data['exterier_photos']);

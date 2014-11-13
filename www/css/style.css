@@ -21,12 +21,12 @@ body {
     margin: 0;
     border-radius: 25px;
     width: 100%;
-    height: 20%
+    //height: 20%;
 }
 
 #header_text {
     //font-size: 250%;
-    font-size: 1.5vw;
+    font-size: 1.6vw;
     color: white;
 }
 
@@ -40,7 +40,8 @@ body {
 }
 
 .side_header_decor img{
-    height: 60%;
+    width: 60%;
+    //height: 60%;
 }
 
 #left_header_decor img{
@@ -60,6 +61,14 @@ body {
     text-align: center;
     float: left;
     width: 100%;
+}
+
+.middle_header_decor img{
+    width: 70%;
+}
+
+#sadyba{
+    font-size: 1.2vw;
 }
 
 #header_middle_container{
@@ -89,7 +98,7 @@ body {
     //text-align: center;
     //border-radius: 25px;
     width: 12%;
-    min-width: 200px;
+    min-width: 150px;
     height: 80%
 }
 
@@ -108,7 +117,7 @@ body {
     height: 5%;
     min-height: 50px;
     background-color: rgba(255,255,255,0.4);
-    font-size: 100%
+    font-size: 0.9vw
 }
 
 #menu_title_container{
@@ -133,7 +142,7 @@ body {
     padding: 0;
     padding-left: 2%;
     padding-top: 2%;
-    font-size: 120%;
+    font-size: 1.1vw;
     text-align: left;
     font-style: normal;
     color: white;
@@ -293,14 +302,14 @@ body {
 }
 
 #contacts_text {
-    font-size: 1.5em;
+    font-size: 1.4vw;
     text-shadow: 4px 5px 6px rgba(0, 0, 0, 0.91);
     color: white;
     text-align: center;
 }
 
 #contacts_text a{
-    font-size: 1.5em;
+    font-size: 1.4vw;
     text-shadow: 4px 5px 6px rgba(0, 0, 0, 0.91);
     color: white;
 }
@@ -325,7 +334,7 @@ body {
   float: left;
   width: 100%;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 100%;
+  font-size: 0.8vw;
   color: #ffffff;
 }
 #cssmenu ul ul {
