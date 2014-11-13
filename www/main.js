@@ -39,6 +39,9 @@ function send_command_request(callback, params, command){
 }
 
 function show_main_page(data){
+    if ($j("#content").length){
+        $j("#content").empty();
+    }
     room_types = data['hotel_service_info']['rooms_types'];
     RoomsTypes = room_types
     $j('#rooms_types').empty();
@@ -46,6 +49,8 @@ function show_main_page(data){
         $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span><b>'+room_types[i]['type_name']+'</b></span></a></li>');
     }
     $j('#rooms_types').append('<li class="room_type"><a><span>Усі кімнати</span></a></li>');
+    available_service = data['hotel_service_info']['available_services'][0]['available_service'].replace(/(?:\r\n|\r|\n)/g, '<br>')
+    $j("#content").append("<div id='hotel_main_comment'>"+available_service+"</div><br>");
     show_photos_galery(data['exterier_photos']);
     
     $j(".room_type").click(function(){
@@ -54,25 +59,23 @@ function show_main_page(data){
     
     padding = Math.floor(($j("#menu_title").height()-$j("#menu_title_container").height())/2);
     $j("#menu_title_container").css({"padding-top":padding});
-    console.log($j( window ).width(), $j("#left_menu_colum").width(), Math.floor($j("#content").css("marginLeft").replace(/[^-\d\.]/g, '')*2)+1)
     content_width = $j( window ).width() - $j("#left_menu_colum").width() - (Math.floor($j("#content").css("marginLeft").replace(/[^-\d\.]/g, '')*2)+1)
-    console.log($j("#content").outerWidth(), $j("#content").outerWidth(true))
     $j("#content").css({"width":content_width})
     
     
 }
 
 function show_separate_room_galery(data){
+    if ($j("#content").length){
+        $j("#content").empty();
+    }
     show_photos_galery(data['room_photo_galery']);
 }
 
 function show_photos_galery(photos_content){
-    if ($j("#content").length){
-        $j("#content").empty();
-    }
     $j("#content").append("<div id='MooFlow' class='mf'></div>");
     for (var i=0; i<photos_content.length; i++){
-        $j("#content").children().append("<div><img src='"+photos_content[i]+"'/></div>");
+        $j("#content").children("#MooFlow").append("<div><img src='"+photos_content[i]+"'/></div>");
     }        
     var mf = new MooFlow($('MooFlow'), {
             bgColor: '#000',

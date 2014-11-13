@@ -19,7 +19,6 @@ $j( document ).ready(function() {
                 show_hotel_rooms(response_data['hotel_rooms']['rooms'], response_data['hotel_service_info']['rooms_types']);
                 set_events_controllers();
                 HotelRoomsTypes = response_data['hotel_service_info']['rooms_types'];
-                console.log(response_data);
             }        
         });
 });
@@ -46,13 +45,13 @@ function show_hotel_contacts_info($hotel_contacts){
 }
 
 function show_hotel_service_info($hotel_service){
-    $j("body").append("<div id='hotel_service'><h3>Сервіс Готелю:</h3><div class='available_service_class' id='available_service'></div></br></br><h3>Типи Кімнат:</h3><div id='room_types' class='room_type_class'></div></div></br></div>")
-    
     available_services = $hotel_service['available_services'][0];
+    $j("body").append("<div id='hotel_service'><h3>Сервіс Готелю:</h3><div class='available_service_class' id='"+available_services['id']+"'></div></br></br><h3>Типи Кімнат:</h3><div id='room_types' class='room_type_class'></div></div></br></div>")
+    
     rooms_types = $hotel_service['rooms_types'];
     
-    $j("#available_service").append('<textarea rows="5" cols="45" name="text">'+available_services['available_service']+'</textarea></br>');
-    $j("#available_service").append(update_button);
+    $j(".available_service_class").append('<textarea rows="5" cols="45" name="text">'+available_services['available_service']+'</textarea></br>');
+    $j(".available_service_class").append(update_button);
     
     for (room_type in rooms_types)
     {
@@ -66,9 +65,7 @@ function show_hotel_service_info($hotel_service){
     $j("#room_types").append(add_button)
 }
 
-function show_hotel_rooms(hotel_rooms, rooms_types){
-    console.log(hotel_rooms);
-    
+function show_hotel_rooms(hotel_rooms, rooms_types){    
     $j("body").append("<h3>Кімнати Готелю:</h3><div id='hotel_rooms' class='hotel_rooms''></div>");
     
     for (room_item in hotel_rooms){
@@ -105,7 +102,6 @@ function showDialog(parent_class, elements)
     dialog = $j("#dialog-modal").dialog(
     {
         width: 500,
-        //height: 400,
         open: function(event, ui)
         {
             $j(this).empty()
@@ -116,27 +112,25 @@ function showDialog(parent_class, elements)
                 var stop_flag = false;
                 switch(parent_class) {
                     case "room_type_class":
-                        if (elements.children("input").is(':empty')){
+                        if (elements.children("input").val().length === 0){
                             alert("Не всі необхідні поля заповнені !!!")
                             stop_flag = true
                             break;
                         }
                         type_name = elements.children("input").val();
                         comment = elements.children("textarea").val();
-                        params = [parent_class, {'type_name' : type_name, 'comment': comment}];
-                        console.log(params);  
+                        params = [parent_class, {'type_name' : type_name, 'comment': comment}]; 
                         break;
                     case "phone_class":
-                        if (elements.children("input").is(':empty')){
+                        if (elements.children("input").val().length === 0){
                             alert("Не всі необхідні поля заповнені !!!")
                             stop_flag = true
                             break;
                         }
                         params = [parent_class, {'phone' : elements.children("input").val()}];
-                        console.log(params);
                         break;
                     case "hotel_rooms":
-                        if ($j('#room_number').is(':empty')){
+                        if ($j('#room_number').val().length === 0){
                             alert("Не всі необхідні поля заповнені !!!")
                             stop_flag = true
                             break;
@@ -146,14 +140,13 @@ function showDialog(parent_class, elements)
                         price = elements.children("#price").val();
                         type = elements.children("#room_type").children("option:selected").attr('value');
                         params = [parent_class, {'id': id, 'comments' : comments, 'price' : price, 'type' : type}];
-                        console.log(params);
                         break;
                 }
                 if (!stop_flag){
                     send_command_request(params, 3)
                     dialog.dialog( "close" );
                 }
-                stop_flag = False;
+                stop_flag = false;
             },
             Close: function(){
                 dialog.dialog( "close" );
@@ -168,30 +161,26 @@ function set_events_controllers(){
             var stop_flag = false;
             switch(parent_class) {
                 case "room_type_class":
-                    if ($j(this).siblings("input").is(':empty')){
+                    if ($j(this).siblings("input").val().length === 0){
                         alert("Не всі необхідні поля заповнені !!!")
                         stop_flag = true
                         break;
                     }
                     params = [parent_class, {'type_name' : $j(this).siblings("input").val(), 'comment': $j(this).siblings("textarea").val()}, $j(this).parent().attr("id")];
-                    console.log(params);  
                     break;
                 case "available_service_class":
                     params = [parent_class, {'available_service' : $j(this).siblings("textarea").val()}, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "contacts_info_class":
                     params = [parent_class, {'address' : $j(this).siblings("textarea").val(), 'email' : $j(this).siblings("input").val()}, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "phone_class":
-                    if ($j(this).siblings("input").is(':empty')){
+                    if ($j(this).siblings("input").val().length === 0){
                         alert("Не всі необхідні поля заповнені !!!")
                         stop_flag = true
                         break;
                     }
                     params = [parent_class, {'phone' : $j(this).siblings("input").val()}, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "hotel_separate_room_class":
                     id = $j(this).parent().attr("id")
@@ -199,7 +188,6 @@ function set_events_controllers(){
                     price = $j(this).siblings("input").val();
                     type = $j(this).siblings("select").children("option:selected").attr('value');
                     params = ["hotel_rooms", {'comments' : comments, 'price' : price, 'type' : type}, id];
-                    console.log(params);
                     break;
             }
             if (!stop_flag){
@@ -216,24 +204,19 @@ function set_events_controllers(){
             parent_class = $j(this).parent().attr('class');
             switch(parent_class) {
                 case "room_type_class":
-                    params = [parent_class, $j(this).parent().attr("id")];
-                    console.log(params);  
+                    params = [parent_class, $j(this).parent().attr("id")]; 
                     break;
                 case "available_service_class":
                     params = [parent_class, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "contacts_info_class":
                     params = [parent_class, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "phone_class":
                     params = [parent_class, $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
                 case "hotel_separate_room_class":
                     params = ['hotel_rooms', $j(this).parent().attr("id")];
-                    console.log(params);
                     break;
             }
             send_command_request(params, 2);
@@ -241,7 +224,6 @@ function set_events_controllers(){
         
     $j(".add").click(function(){
             parent_class = $j(this).parent().attr('class');
-            console.log(parent_class)
             elements = $j("<div id='sending_elements'></div>");
             elements.empty()
             switch(parent_class) {
@@ -265,7 +247,6 @@ function set_events_controllers(){
                     elements.append("Ціна: <input id='price' type='text' size='15'><br>");
                     break;
             }
-            console.log(HotelRoomsTypes)
             showDialog(parent_class, elements);
         });
 }
@@ -275,7 +256,6 @@ function send_command_request(params, command){
         "sender" : "admin_ui",
         "data" : { "command" : command, "params" : params }        
     }
-    console.log(params, command)
     
     $j.ajax({
         type: "POST",
@@ -283,13 +263,7 @@ function send_command_request(params, command){
         url: "communication_controller.php",
         data: request,
         success: function (response_data) {
-                console.log(response_data);
                 location.reload();
             }        
         });
-}
-
-function field_is_empy(field)
-{
-    retu
 }
