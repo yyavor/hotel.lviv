@@ -19,7 +19,24 @@
 </head>
 <body>
     <div id='header'>
-        some content
+        <div class="side_header_decor" id="left_header_decor">
+            <img src="/images/left_decor.png">
+        </div>
+        <div id="header_middle_container">
+            <div class="middle_header_decor" id="top_header_decor">
+                <img src="/images/top_decor.png">
+            </div>
+            <div id="header_text">
+                <span id="sadyba"><b>Садиба</b></span><br>
+                <span id="rod_dvir"><b>Родинний Двір</b></span>
+            </div>
+            <div class="middle_header_decor" id="bottom_header_decor">
+                <img src="/images/bottom_decor.png">
+            </div>            
+        </div>
+        <div class="side_header_decor" id="right_header_decor">
+            <img src="/images/right_decor.png">
+        </div>
     </div>
     <div id='left_menu_colum'>
         <div id='menu_title'>

@@ -52,9 +52,14 @@ function show_main_page(data){
         send_command_request(get_rooms_list, $j(this).attr('id'), 2);    
     });
     
-    $j("#cssmenu").css("font-size","90.5%");
     padding = Math.floor(($j("#menu_title").height()-$j("#menu_title_container").height())/2);
     $j("#menu_title_container").css({"padding-top":padding});
+    console.log($j( window ).width(), $j("#left_menu_colum").width(), Math.floor($j("#content").css("marginLeft").replace(/[^-\d\.]/g, '')*2)+1)
+    content_width = $j( window ).width() - $j("#left_menu_colum").width() - (Math.floor($j("#content").css("marginLeft").replace(/[^-\d\.]/g, '')*2)+1)
+    console.log($j("#content").outerWidth(), $j("#content").outerWidth(true))
+    $j("#content").css({"width":content_width})
+    
+    
 }
 
 function show_separate_room_galery(data){
@@ -106,7 +111,7 @@ function get_rooms_list(data){
         room_info_container.append('<div id="'+room+'"class="room_photo_item"></div>');
 
         room_text_container = $j('<div class="room_text_container"></div>');
-        room_text_container.append('<div class="rooms_ids"><span><b>Номер кімнати:</b> </span>'+room+'</div><br><br>')
+        room_text_container.append('<div class="rooms_ids"><span><b>Номер кімнати:</b> </span>'+room+'</div><br>')
         root_type_name = ''
         for(type_el in RoomsTypes){
             if (RoomsTypes[type_el]['id'] == rooms[room]['type']){

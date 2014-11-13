@@ -255,7 +255,7 @@ function set_events_controllers(){
                 case "hotel_rooms":                    
                     elements.append("Номер кімнати: <input id='room_number' type='text' size='15'><br>");
                     elements.append("Коментар: <textarea id='comments' rows='5' cols='45' name='text'></textarea><br>");
-                    elements.append("Тип:");
+                    elements.append("Тип: ");
                     rooms_types_list = $j("<select id='room_type'><select>")
                     for (type in HotelRoomsTypes){
                         rooms_types_list.append("<option value='"+HotelRoomsTypes[type]['id']+"'>"+HotelRoomsTypes[type]['type_name']+"</option>"); 
