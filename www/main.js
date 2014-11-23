@@ -7,6 +7,8 @@ var $j = jQuery.noConflict();
 var RoomsTypes;
 
 $j( document ).ready(function() {
+    padding = Math.floor(($j("#menu_title").height()-$j("#menu_title_container").height())/2);
+    $j("#menu_title_container").css({"padding-top":padding});
     send_command_request(show_main_page, null, 0);
     
     $j("#exterier_menu_link").click(function(){
@@ -48,7 +50,7 @@ function show_main_page(data){
     for (var i=0; i<room_types.length; i++){
         $j('#rooms_types').append('<li class="room_type" id='+room_types[i]['id']+'><a><span><b>'+room_types[i]['type_name']+'</b></span></a></li>');
     }
-    $j('#rooms_types').append('<li class="room_type"><a><span>Усі кімнати</span></a></li>');
+    $j('#rooms_types').append('<li class="room_type"><a><span><b>Усі кімнати</b></span></a></li>');
     available_service = data['hotel_service_info']['available_services'][0]['available_service'].replace(/(?:\r\n|\r|\n)/g, '<br>')
     $j("#content").append("<div id='hotel_main_comment'>"+available_service+"</div><br>");
     show_photos_galery(data['exterier_photos']);
@@ -57,8 +59,6 @@ function show_main_page(data){
         send_command_request(get_rooms_list, $j(this).attr('id'), 2);    
     });
     
-    padding = Math.floor(($j("#menu_title").height()-$j("#menu_title_container").height())/2);
-    $j("#menu_title_container").css({"padding-top":padding});
     content_width = $j( window ).width() - $j("#left_menu_colum").width() - (Math.floor($j("#content").css("marginLeft").replace(/[^-\d\.]/g, '')*2)+1)
     $j("#content").css({"width":content_width})
     
@@ -161,14 +161,18 @@ function show_contacts(data){
     }
     
     email = 'E-mail: <a href="mailto:'+contacts_info['email']+'">'+contacts_info['email']+'</a><br>';
-    address = contacts_info['address'];
+    address = contacts_info['address'].replace(/(?:\r\n|\r|\n)/g, '<br>');
+    
+    ways = contacts_info['ways_to_get'].replace(/(?:\r\n|\r|\n)/g, '<br>');
     
     width = Math.round(($j( window ).width()/100)*80);
     height = Math.round(($j( window ).height()/100)*80);  
     
     $j("#content").append('<div id="place_on_map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.138220771666!2d23.96858374224904!3d49.81296796871404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473ae70c3533e4eb%3A0xa031acbc59876fea!2z0LLRg9C7LiDQodC60L3QuNC70ZbQstGB0YzQutCwLCA3NSwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1409680971676" width="'+width+'" height="'+height+'" frameborder="0" style="border:0"></iframe></div>');
-    $j("#content").append('<div id="contacts_text"></div>');
-    $j("#contacts_text").append(phones_text, email, address);
+    $j("#content").append('<div class="contacts_text" id="main_contacts_text"></div>');
+    $j("#content").append('<div class="contacts_text" id="ways_to_get"></div>');
+    $j("#main_contacts_text").append(phones_text, email, address);
+    $j("#ways_to_get").append(ways);
     
 }
 

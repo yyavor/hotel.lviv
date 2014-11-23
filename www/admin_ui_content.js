@@ -33,15 +33,17 @@ function show_hotel_contacts_info($hotel_contacts){
     
     $j("body").append("<h3>Контакти Готелю:</h3><div id='hotel_contacts' class='phone_class''><div class='contacts_info_class' id='"+contacts_info['id']+"'></div></br></br><div id='hotel_phones' class='phone_class'></div></div></br></div>");
 
-    $j(".contacts_info_class").append('<textarea rows="5" cols="45" name="text">'+contacts_info['address']+'</textarea></br>');
+    $j(".contacts_info_class").append('<textarea id="hotel_address" rows="5" cols="45" name="text">'+contacts_info['address']+'</textarea></br>');
+    $j(".contacts_info_class").append('<textarea id="ways_to_get" rows="5" cols="45" name="text">'+contacts_info['ways_to_get']+'</textarea></br>');
     $j(".contacts_info_class").append("<input id='email' type='text' value='"+contacts_info['email']+"'>");
     $j(".contacts_info_class").append(update_button);
     
     for (phone in phone_numbers){
         $j("#hotel_phones").append("<div id='"+phone_numbers[phone]['id']+"' class='phone_class'><input type='text' value='"+phone_numbers[phone]['phone']+"'>"+update_button+delete_button+"</div>");
-    }
-    
+    }    
     $j("#hotel_phones").append(add_button);
+    
+    
 }
 
 function show_hotel_service_info($hotel_service){
@@ -172,7 +174,10 @@ function set_events_controllers(){
                     params = [parent_class, {'available_service' : $j(this).siblings("textarea").val()}, $j(this).parent().attr("id")];
                     break;
                 case "contacts_info_class":
-                    params = [parent_class, {'address' : $j(this).siblings("textarea").val(), 'email' : $j(this).siblings("input").val()}, $j(this).parent().attr("id")];
+                    address = $j(this).siblings("#hotel_address").val();
+                    email = $j(this).siblings("input").val();
+                    ways = $j(this).siblings("#ways_to_get").val();
+                    params = [parent_class, {'address' : address, 'email' : email, 'ways_to_get' : ways}, $j(this).parent().attr("id")];
                     break;
                 case "phone_class":
                     if ($j(this).siblings("input").val().length === 0){

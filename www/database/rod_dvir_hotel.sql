@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Ноя 13 2014 г., 20:16
+-- Время создания: Ноя 22 2014 г., 19:11
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `rod_dvir_hotel`
 --
-CREATE DATABASE `rod_dvir_hotel` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `rod_dvir_hotel`;
 
 -- --------------------------------------------------------
 
@@ -30,6 +28,7 @@ USE `rod_dvir_hotel`;
 
 CREATE TABLE IF NOT EXISTS `hotel_info` (
   `address` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `ways_to_get` text NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -41,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `hotel_info` (
 -- Дамп данных таблицы `hotel_info`
 --
 
-INSERT INTO `hotel_info` (`address`, `email`, `id`) VALUES
-('м. Львів, вул. Скнилівська, 75б', 'rod.dvir@gmail.com', 0);
+INSERT INTO `hotel_info` (`address`, `ways_to_get`, `email`, `id`) VALUES
+('м. Львів, вул. Скнилівська, 75б', 'До нас можна добратись:\nРізними маршрутами\nмаршрутка №5757575 з Залізничного вокзалу;', 'rod.dvir@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -56,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `hotel_phones` (
   UNIQUE KEY `phone_numbers` (`phone`),
   UNIQUE KEY `id_2` (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `hotel_phones`
@@ -106,15 +105,15 @@ CREATE TABLE IF NOT EXISTS `rooms_types` (
   `type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `comment` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `rooms_types`
 --
 
 INSERT INTO `rooms_types` (`id`, `type_name`, `comment`) VALUES
-(1, 'Стандарт', ''),
-(2, 'Напів-люкc', '-мега супер\n-service'),
+(1, 'Стандарт', 'Комментар\nдля номера станларт'),
+(2, 'Покращений стандарт', '-мега супер\n-service'),
 (3, 'Люкс', '-Телевізор\r\n-Душ\r\n-прибирання кожного дня\r\n-кімната для гостей');
 
 -- --------------------------------------------------------

@@ -1,11 +1,14 @@
 <?php
+//require_once 'third_party/MeekroDB/meekrodb.2.3.class.php';
+
 ob_start();
 session_start(); //Start the session
 $username = $_POST['username']; //Set UserName
 $password = $_POST['password']; //Set Password
 $msg ='';
 if(isset($username, $password)) {
-    include('/config.php'); //Initiate the MySQL connection
+    include('config.php'); //Initiate the MySQL connection
+    
     $result = DB::query("SELECT * FROM users WHERE name='".$username."' and password=SHA('".$password."')");
     // If result matched $myusername and $mypassword, table row must be 1 row
     if(count($result)){
