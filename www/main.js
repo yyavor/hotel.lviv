@@ -114,7 +114,7 @@ function get_rooms_list(data){
         room_info_container.append('<div id="'+room+'"class="room_photo_item"></div>');
 
         room_text_container = $j('<div class="room_text_container"></div>');
-        room_text_container.append('<div class="rooms_ids"><span><b>Номер кімнати:</b> </span>'+room+'</div><br>')
+        //room_text_container.append('<div class="rooms_ids"><span><b>Номер кімнати:</b> </span>'+room+'</div><br>')
         root_type_name = ''
         for(type_el in RoomsTypes){
             if (RoomsTypes[type_el]['id'] == rooms[room]['type']){
