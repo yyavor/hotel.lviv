@@ -53,7 +53,12 @@ function show_main_page(data){
     $j('#rooms_types').append('<li class="room_type"><a><span><b>Усі кімнати</b></span></a></li>');
     available_service = data['hotel_service_info']['available_services'][0]['available_service'].replace(/(?:\r\n|\r|\n)/g, '<br>')
     $j("#content").append("<div id='hotel_main_comment'>"+available_service+"</div><br>");
-    show_photos_galery(data['exterier_photos']);
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        show_photos_galery_mobile(data['exterier_photos']);
+    }
+    else{
+        show_photos_galery(data['exterier_photos']);
+    }
     
     $j(".room_type").click(function(){
         send_command_request(get_rooms_list, $j(this).attr('id'), 2);    
@@ -69,7 +74,24 @@ function show_separate_room_galery(data){
     if ($j("#content").length){
         $j("#content").empty();
     }
-    show_photos_galery(data['room_photo_galery']);
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        show_photos_galery_mobile(data['room_photo_galery']);
+    }
+    else{
+        show_photos_galery(data['room_photo_galery']);
+    }
+}
+
+function show_photos_galery_mobile(photos_content){
+    for (var i=0; i<photos_content.length; i++){
+        $j("#content").append("<img src='"+photos_content[i]+"'/>");
+    }
+    Galleria.loadTheme('third_party/galleria/themes/classic/galleria.classic.js');
+    Galleria.configure({
+        transition: 'fade',
+        fullscreenDoubleTap: true
+    });
+    Galleria.run('#content');
 }
 
 function show_photos_galery(photos_content){

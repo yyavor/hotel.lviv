@@ -5,18 +5,19 @@
     <meta name="description" content="Садиба Родинний Двір - це затишне місце у Львові, де ви зможите зупинитись для проживання."/>
     <meta name="keywords" content="садиби львова, садиба львів, садиби львів, родинний двір, родинний двір Львів, садиба, оренда кімнати, подобова оренда, житло" />
     <title>Родинний двір</title>
+    <link rel="stylesheet" type="text/css" href="/third_party/galleria/themes/classic/galleria.classic.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    
     
     <script src="third_party/jquery/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="third_party/mootools/mootools-1.2-core.js"></script>
     <script type="text/javascript" src="third_party/mootools/mootools-1.2-more.js"></script>
     <script type="text/javascript" src="third_party/MooFlow/MooFlow.js"></script>
+    <script type="text/javascript" src="third_party/galleria/galleria-1.4.2.js"></script>
+    <script type="text/javascript" src="third_party/galleria/themes/classic/galleria.classic.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="/third_party/accordion_menu/accordion_menu.js"></script>
-    
-    
+    <script type="text/javascript" src="/third_party/accordion_menu/accordion_menu.js"></script>    
 </head>
+    
 <body>
     <div id='header'>
         <div class="side_header_decor" id="left_header_decor">
