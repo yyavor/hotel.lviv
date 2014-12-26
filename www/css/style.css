@@ -85,6 +85,10 @@ body {
     #sadyba {font-size: 80%;}   
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    #sadyba {font-size: 80%;}
+}
+
 #header_middle_container{
     position: relative;
     margin: 0;
@@ -139,6 +143,10 @@ body {
 
 @-moz-document url-prefix(){
     #hotel_main_comment {font-size: 110%;}   
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    ::i-block-chrome, #hotel_main_comment {font-size: 0.8vw;}
 }
 
 #left_menu_colum{
@@ -394,6 +402,13 @@ body {
 
 #ways_to_get{
     float: right;
+}
+
+#galleria_photos_container{
+    position: relative;
+    float: left;
+    width: 90%;
+    height: 90%
 }
 
 #cssmenu,

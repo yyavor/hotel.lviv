@@ -83,15 +83,16 @@ function show_separate_room_galery(data){
 }
 
 function show_photos_galery_mobile(photos_content){
-    for (var i=0; i<photos_content.length; i++){
-        $j("#content").append("<img src='"+photos_content[i]+"'/>");
+    $j("#content").append("<div id='galleria_photos_container'></div>");
+    for (var i=0; i<photos_content.length; i++){        
+        $j("#galleria_photos_container").append("<img src='"+photos_content[i]+"'/>");
     }
     Galleria.loadTheme('third_party/galleria/themes/classic/galleria.classic.js');
     Galleria.configure({
         transition: 'fade',
         fullscreenDoubleTap: true
     });
-    Galleria.run('#content');
+    Galleria.run('#galleria_photos_container');
 }
 
 function show_photos_galery(photos_content){
